@@ -1,22 +1,17 @@
 import React from "react";
-import { useState } from "react";
 
-export default function Pagination({ page, setPage, pagesMax }) {
-  const [input, setInput] = useState(1);
-
+export default function Pagination({ page, setPage, pagesMax, setOffset }) {
   const nextPage = () => {
-    setInput(input + 1);
     setPage(page + 1);
   };
 
   const prevPage = () => {
-    setInput(input - 1);
     setPage(page - 1);
   };
   return (
     <div>
-      <div className="flex items-center justify-center py-5">
-        <div className="flex justify-center items-center space-x-4">
+      <div className="w-52 max-w-xs flex justify-around  items-center space-x-4 mx-auto ">
+        {page !== 1 ? (
           <button
             onClick={prevPage}
             type="button"
@@ -24,8 +19,17 @@ export default function Pagination({ page, setPage, pagesMax }) {
           >
             Prev
           </button>
-         <p>{input}</p>
-          <p>/ de {pagesMax} </p>
+        ) : (
+          ""
+        )}
+
+        <div className="flex justify-around my-8">
+          <p className="mx-3">{page}</p>
+          <p className="mx-3"> / </p>
+          <p className="mx-3">{page === pagesMax ? pagesMax : 7}</p>
+        </div>
+
+        {page !== pagesMax ? (
           <button
             onClick={nextPage}
             type="button"
@@ -33,7 +37,9 @@ export default function Pagination({ page, setPage, pagesMax }) {
           >
             Next
           </button>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

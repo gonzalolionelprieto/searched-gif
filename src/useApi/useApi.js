@@ -18,6 +18,7 @@ const [totalItems, setTotalItems] = useState(0)
         setLoading(true);
         setData(responseJson.data);
         setTotalItems(responseJson.pagination.total_count)
+        
       })
       .catch((err) => console.log(err));
   };

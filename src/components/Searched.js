@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Searched({ setCategory }) {
+function Searched({ setCategory,setPage }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -11,6 +11,7 @@ function Searched({ setCategory }) {
       setError(true);
       return;
     }
+    setPage(1)
     setError(false);
     setCategory(value);
     setValue("");
@@ -25,7 +26,7 @@ function Searched({ setCategory }) {
             placeholder="Search GIPHY"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            className="text-black"
+            className="text-black rounded"
           />
         </form>
         {error ? <p className="error">El campo no puede estar vacio...</p> : ""}

@@ -1,23 +1,25 @@
 import React from "react";
-import { useState } from "react";
 import useApi from "../useApi/useApi";
 import ItemGif from "./ItemGif";
 import Pagination from "./Pagination";
 
 function DisplayGifts(props) {
   const { loading, data, totalItems } = useApi(props.url);
-  const [page, setPage] = useState(1);
+  
 
 
 
-  const indexOfLastItem = page * props.itemsPerPage;
+  const indexOfLastItem = props.page * props.itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - props.itemsPerPage;
 
   const pagesMax =Math.ceil(totalItems / props.itemsPerPage) ;
 
   return (
     <>
-    <h3>Results with "{props.category}"</h3>
+    {
+      props.category ?<h3 className="my-4">Results with "{props.category}"</h3>:" "
+    }
+    
       <div className="container-gif">
         
         {loading
@@ -36,7 +38,10 @@ function DisplayGifts(props) {
               ))
           : ""}
       </div>
-      <Pagination page={page} setPage={setPage} pagesMax={pagesMax} />
+      {
+        props.category?( <Pagination page={props.page} setPage={props.setPage} pagesMax={pagesMax} setOffset={props.setOffset}/>):""
+      }
+     
     </>
   );
 }
